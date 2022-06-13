@@ -2,7 +2,7 @@
 const path = require('path')
 
 //get the location of the file "database.sqlite"
-const dbPath = path.resolve(__dirname, "db/database.sqliate")
+const dbPath = path.resolve(__dirname, "db/database.sqlite")
 
 //create connection to the SQLite database. The client parameter specifies that we use sqlite3
 const knex = require('knex')({
