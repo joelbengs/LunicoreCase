@@ -1,5 +1,5 @@
 const express = require('express')
-import employeesRoutes from './../controllers/employees-controller.js'
+import employeesRoutes from '../controllers/employees-controller.js'
 const router = express.Router();
 
 // Add route for GET request to retrieve all employees
