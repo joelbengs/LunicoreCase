@@ -22,7 +22,7 @@ employeesCreate = async(req, res) => {
     knex('employees')
     .insert({
         'name': req.body.name,
-        'salary': req.body.salary
+        'sales': req.body.sales
     })
     .then(() => {
         // Send a success message in response
