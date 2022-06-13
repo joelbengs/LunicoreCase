@@ -45,12 +45,13 @@ export const Employee = () => {
   const handleEmployeeCreate = () => {
     // Send POST request to 'books/create' endpoint
     axios
-      .post('http://localhost:4001/employee/create', {
+      .post('http://localhost:4001/employees/create', {
         name: name,
         sales: sales
       })
       .then(res => {
         console.log(res.data)
+        console.log("HelloWorld from line 54 in handleEmployeeCreate");
         // Fetch all books to refresh
         // the books on the bookshelf list
         fetchEmployees()
