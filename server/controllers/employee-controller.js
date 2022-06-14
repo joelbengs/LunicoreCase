@@ -4,11 +4,9 @@
 // Import database
 const knex = require('../db');
 
-//get all employees from database, using asyncronus function.
-//req is a json containing data (needed when eq adding employee)
-//res is the promise response object
+//GET all employees, without sale
 exports.employeeAll = async(req, res) => {
-    knex.select('*')
+    knex.select('id').select('name')
     .from('employee')
     .then(userData => {
         res.json(userData)
@@ -18,10 +16,25 @@ exports.employeeAll = async(req, res) => {
     })
 };
 
+//GET all employees with sales
+exports.employeeTotalSales = async(req, res) => {
+    knex.select('*')
+    .from('employee')
+    .then(userData => {
+        res.json(userData)
+    })
+    .catch(err => {
+        res.json({ message: `There was an error retrieving total sales: ${err}` })
+    })
+};
+
+//POST employee
 exports.employeeCreate = async(req, res) => {
     knex('employee')
     .insert({
-        'name': req.body.name
+        'id': req.body.id,
+        'name': req.body.name,
+        'sale': req.body.sale || 0
     })
     .then(() => {
         // Send a success message in response
@@ -32,3 +45,17 @@ exports.employeeCreate = async(req, res) => {
         res.json({ message: `There was an error creating ${req.body.name} employee: ${err}`})
       })
   };
+
+//DELETE employee, without returning it
+exports.employeeDelete = async(req, res) => {
+    knex('employee').where('id', req.body.id)
+    .del()
+    .then(() => {
+        // Send a success message in response
+        res.json({ message: `Employee ${req.body.id} deleted.` })
+      })
+      .catch(err => {
+        // Send a error message in response
+        res.json({ message: `There was an error deleting ${req.body.id} employee: ${err}` })
+      })
+  }

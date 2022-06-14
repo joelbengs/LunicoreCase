@@ -31,7 +31,7 @@ export function Car(props: any) {
         axios.post('http://localhost:4001/car/create', {
             brand: brand,
             model: model,
-            price: price
+            price: parseInt(price)
         })
         .then(res => {
             console.log('Successfull add!')
@@ -41,7 +41,7 @@ export function Car(props: any) {
     }
 
     const handleDeleteCar = (id: number) => {
-        axios.delete('http://localhost:4001/car/delete', { id:id })
+        axios.put('http://localhost:4001/car/delete', { id:id })
         .then(() => {
             console.log('Car with id ${id} deleted')
             getCarTable();
@@ -51,7 +51,7 @@ export function Car(props: any) {
 
     //Handle the submit from the form
     const handleSubmit = () => {
-        if (brand.length > 0 && model.length > 0 && price.toString.length > 0) {
+        if (brand.length > 0 && model.length > 0 && price.length > 0) {
             handleCreateCar();
         } else {
             console.info('Form was not valid - try again')
@@ -91,7 +91,7 @@ export function Car(props: any) {
 
                         <fieldset>
                             <label className="form-label" >Enter price: </label>
-                            <input className="form-input" type="number" id="price" name="price" value={price} onChange={(e) => setPrice(parseInt(e.currentTarget.value))} />
+                            <input className="form-input" type="string" id="price" name="price" value={price} onChange={(e) => setPrice(e.currentTarget.value)} />
                         </fieldset>
                     </div>
                 </div>

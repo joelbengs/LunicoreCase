@@ -1,6 +1,6 @@
 const knex = require('../db.js');
-const router = require('../routes/employee-routes.js');
 
+//GET all cars
 exports.carAll = async(req, res) => {
     knex.select('*').from('car').then(userData => {
         res.json(userData)
@@ -10,6 +10,7 @@ exports.carAll = async(req, res) => {
     });
 };
 
+//POST car
 exports.carCreate = async(req, res) => {
     knex('car').insert({
         'brand': req.body.brand,
@@ -26,8 +27,23 @@ exports.carCreate = async(req, res) => {
     })
 };
 
+//DELETE car, and return it (might not be working)
 exports.carDelete = async(req, res) => {
-    knex('car').where('id', req.body.id).del()
+    knex('car').where('id', req.body.id)
+    .del()
+    .then(userData => {
+        res.json(userData)
+      })
+      .catch(err => {
+        // Send a error message in response
+        res.json({ message: `There was an error deleting ${req.body.id} car: ${err}` })
+      })
+  }
+
+/*   //DELETE car, without returning it
+exports.carDelete = async(req, res) => {
+    knex('car').where('id', req.body.id)
+    .del()
     .then(() => {
         // Send a success message in response
         res.json({ message: `Car ${req.body.id} deleted.` })
@@ -36,4 +52,4 @@ exports.carDelete = async(req, res) => {
         // Send a error message in response
         res.json({ message: `There was an error deleting ${req.body.id} car: ${err}` })
       })
-  }
+  } */

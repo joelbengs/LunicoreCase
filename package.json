@@ -34,7 +34,7 @@
   "scripts": {
     "start-server": "nodemon server/server.js --watch server/*",
     "start-front": "react-scripts start",
-    "start": "concurrently \"npm run start-server\" \"npm run start-front\" --kill-others --kill-others-on-fail",
+    "start": "concurrently \"npm run start-server\" \"npm run start-front\"",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

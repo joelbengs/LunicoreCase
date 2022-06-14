@@ -1,17 +1,13 @@
-// Import deps
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-// Import subcomponents
 import { EmployeeList } from './employee-list'
-// Import styles
-//import './../styles/bookshelf.css'
 
-// Create Bookshelf component
 export const Employee = () => {
   // Prepare states
-  const [name, setName] = useState('')
-  const [sales, setSales] = useState('')
   const [employees, setEmployee] = useState([])
+  const [id, setId] = useState('')
+  const [name, setName] = useState('')
+  const [sale, setSale] = useState('')
   const [loading, setLoading] = useState(true)
 
   // Fetch all employee on initial render and every state change
@@ -19,12 +15,10 @@ export const Employee = () => {
     fetchEmployee()
   }, [])
 
-  // Fetch all books
+  // Fetch all employees and total sales
   const fetchEmployee = async () => {
-    // Send GET request to 'books/all' endpoint
-    axios.get('http://localhost:4001/employee/all')
+    axios.get('http://localhost:4001/employee/total_sales')
       .then(response => {
-        // Update the books state
         setEmployee(response.data)
         // Update loading state
         setLoading(false)
@@ -35,51 +29,45 @@ export const Employee = () => {
   // Reset all input fields
   const handleInputsReset = () => {
     setName('')
-    setSales('')
+    setId('')
+    setSale('')
   }
 
-  // Create new book
+  // Create new employee
   const handleEmployeeCreate = () => {
     // Send POST request to 'books/create' endpoint
     axios
       .post('http://localhost:4001/employee/create', {
+        id: id,  
         name: name,
-        sales: sales
+        sale: sale,
       })
       .then(res => {
         console.log(res.data)
-        // Fetch all books to refresh
-        // the books on the bookshelf list
         fetchEmployee()
       })
       .catch(error => console.error(`There was an error creating the ${name} employee: ${error}`))
   }
 
- // Submit new book
+ // Submit new employee
  const handleEmployeeSubmit = () => {
-    // Check if all fields are filled
-    if (name.length > 0 && sales.length > 0) {
-      // Create new book
+    if (id.length > 0 && name.length > 0 && sale.length > 0) {
       handleEmployeeCreate()
-      console.info(`Employee ${name} with sales of ${sales} added.`)
-      // Reset all input fields
+      console.info(`Employee ${name} with sales of ${sale} added.`)
       handleInputsReset()
     }
   }
 
-  // Remove book
-  const handleEmployeeRemove = (id: number, name: string) => {
+  // Remove employee
+  const handleEmployeeRemove = (id: number) => {
     // Send PUT request to 'books/delete' endpoint
     axios
-      .put('http://localhost:4001/books/delete', { id: id })
+      .put('http://localhost:4001/employee/delete', { id: id })
       .then(() => {
-        console.log(`Employee ${name} removed.`)
-
-        // Fetch all books to refresh
-        // the books on the bookshelf list
+        console.log(`Employee ${id} removed.`)
         fetchEmployee()
       })
-      .catch(error => console.error(`There was an error removing the ${name} employee: ${error}`))
+      .catch(error => console.error(`There was an error removing the ${id} employee: ${error}`))
   }
 
   return (
@@ -88,17 +76,21 @@ export const Employee = () => {
       <div className="employee-form">
         <div className="form-wrapper" onSubmit={handleEmployeeSubmit}>
           <div className="form-row">
+          <fieldset>
+              <label className="form-label" >Enter id: </label>
+              <input className="form-input" type="number" id="id" name="id" value={id} onChange={(e) => setId(e.currentTarget.value)} />
+            </fieldset>
+
             <fieldset>
-              <label className="form-label" htmlFor="name">Enter name: </label>
+              <label className="form-label" >Enter name: </label>
               <input className="form-input" type="text" id="name" name="name" value={name} onChange={(e) => setName(e.currentTarget.value)} />
             </fieldset>
 
             <fieldset>
-              <label className="form-label" htmlFor="sales">Enter sales: </label>
-              <input className="form-input" type="number" id="author" name="author" value={sales} onChange={(e) => setSales(e.currentTarget.value)} />
+              <label className="form-label" >Enter total sales: </label>
+              <input className="form-input" type="number" id="sale" name="sale" value={sale} onChange={(e) => setSale(e.currentTarget.value)} />
             </fieldset>
           </div>
-
         </div>
 
         <button onClick={handleEmployeeSubmit} className="btn btn-add">Add the employee</button>

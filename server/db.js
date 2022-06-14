@@ -27,8 +27,9 @@ knex.schema.hasTable('employee')
     .then((exists) => {
       if (!exists) {
         return knex.schema.createTable('employee', (table)  => {
-          table.increments('id').primary();
+          table.integer('id').primary();
           table.string('name');
+          table.integer('sale');
         })
         .then(() => {
           console.log('Table \'employee\' created using knex in db.js')
@@ -67,15 +68,38 @@ knex.schema.hasTable('car')
     console.error(`There was an error setting up the database with knex in db.js: ${error}`)
   });
 
+//Create table in the database called "sale"
+knex.schema.hasTable('sale')
+.then((exists) => {
+  if (!exists) {
+    return knex.schema.createTable('sale', (table) => {
+      table.increments('id').primary();
+      table.string('employee_id');
+      table.string('carmodel_id');
+    }).then(() => {
+      console.log('Table \'sale\' was created using knex in db.js');
+    }).catch((error) => {
+      console.error('There was an error creating table \'sale\' in db.js');
+    });
+  }})
+  .then(() => {
+    console.log('Done creating table \'sale\' in db.js')
+  })
+  .catch((error) => {
+    console.error(`There was an error setting up the database with knex in db.js: ${error}`)
+  });
 
 // Just for debugging purposes:
-// Log all data in tables
 knex.select('*').from('employees')
-  .then(data => console.log('data from employee table from knex in db.js:', data))
+  .then(data => console.log('initial data from employee table from knex in db.js:', data))
   .catch(err => console.log(err))
 
 knex.select('*').from('car')
-  .then(data => console.log('data from car table from knex in db.js:', data))
+  .then(data => console.log('inital data from car table from knex in db.js:', data))
+  .catch(err => console.log(err))
+
+knex.select('*').from('sale')
+  .then(data => console.log('inital data from sale table from knex in db.js:', data))
   .catch(err => console.log(err))  
 
 // Export the database
