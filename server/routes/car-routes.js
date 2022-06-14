@@ -9,7 +9,7 @@ router.get('/all', carController.carAll);
 router.post('/create', carController.carCreate);
 
 //DELETE car *required
-
+router.delete('/delete', carController.carDelete)
 //UPDATE car
 
 

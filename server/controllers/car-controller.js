@@ -25,3 +25,15 @@ exports.carCreate = async(req, res) => {
         res.json({ message: `from car-controller: There was an error creating the car \'${req.body.brand}, ${req.body.model}, ${req.body.price}\' ${err}`});
     })
 };
+
+exports.carDelete = async(req, res) => {
+    knex('car').where('id', req.body.id).del()
+    .then(() => {
+        // Send a success message in response
+        res.json({ message: `Car ${req.body.id} deleted.` })
+      })
+      .catch(err => {
+        // Send a error message in response
+        res.json({ message: `There was an error deleting ${req.body.id} car: ${err}` })
+      })
+  }

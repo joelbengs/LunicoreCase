@@ -2,20 +2,20 @@ import React from "react";
 
 interface CarListRowUI {
     car: {
+        id: number;
         brand: string;
         model: string;
         price: number;
     }
+    handleDeleteCar:(id: number) => void;
 }
 
 export const CarListRow = (props: CarListRowUI) => {
-
-    function HelloWorld() {
-        console.log('Hello World, you just pushed a button')
-    }
-
     return (
     <tr className="table-row">
+        <td className="table-item">
+        {props.car.id}
+        </td>
 
         <td className="table-item">
         {props.car.brand}
@@ -30,7 +30,7 @@ export const CarListRow = (props: CarListRowUI) => {
         </td>
 
         <td className="table-item">
-            <button className="btn btn-remove" onClick={HelloWorld}>
+            <button className="btn btn-remove" onClick={() => props.handleDeleteCar(props.car.id)}>
             Remove Car
             </button>
         </td>

@@ -27,32 +27,53 @@ export function Car(props: any) {
     }
 
     //Sends POST request to server
-    const postCar = () => {
+    const handleCreateCar = () => {
         axios.post('http://localhost:4001/car/create', {
-            brand: "Volvo",
-            model: "S90",
-            price: 250000
+            brand: brand,
+            model: model,
+            price: price
         })
         .then(res => {
             console.log('Successfull add!')
             console.log(res.data)
         })
-        .catch(error => console.error('There was an error creating the Volvo car (from car.tsx): ${error}'))
+        .catch(error => console.error('There was an error creating the ${name} car (from car.tsx): ${error}'))
     }
 
-    const handleSubmit = (event) => {
-        if(event.target.checkValidity() === true) {
-            console.log('Submit was valid');
+    const handleDeleteCar = (id: number) => {
+        axios.delete('http://localhost:4001/car/delete', { id:id })
+        .then(() => {
+            console.log('Car with id ${id} deleted')
+            getCarTable();
+        })
+        .catch(error => console.error(`There was an error removing the car with id ${id}: ${error}`))
+    }
+
+    //Handle the submit from the form
+    const handleSubmit = () => {
+        if (brand.length > 0 && model.length > 0 && price.toString.length > 0) {
+            handleCreateCar();
         } else {
-            console.log("Submit was not valid");
+            console.info('Form was not valid - try again')
         }
+        handleInputReset();
+    }
+
+    //Resets the form upon submit
+    const handleInputReset = () => {
+        setBrand('');
+        setModel('');
+        setPrice('');
     }
     
+    //HTML
     return (
         <div className="car-wrapper">
             <h1>This is a car paragraph</h1>
-            <button onClick={postCar} className="btn btn-add">Add a Volvo!</button>       
-            <CarList cars={carTable} />
+            <button onClick={handleCreateCar} className="btn btn-add">Add a Volvo!</button>       
+            
+            {/*List of existing cars*/}
+            <CarList cars={carTable} handleDeleteCar={handleDeleteCar} />
             
             {/*form for creating new car*/}
             <div className="car-form">
@@ -70,14 +91,12 @@ export function Car(props: any) {
 
                         <fieldset>
                             <label className="form-label" >Enter price: </label>
-                            <input className="form-input" type="number" id="price" name="price" value={price} onChange={(e) => setPrice(e.currentTarget.value)} />
+                            <input className="form-input" type="number" id="price" name="price" value={price} onChange={(e) => setPrice(parseInt(e.currentTarget.value))} />
                         </fieldset>
                     </div>
                 </div>
                 <button onClick={handleSubmit} className="btn btn-add">Add the car</button>
             </div>
-
-
         </div>
     );
 } 
