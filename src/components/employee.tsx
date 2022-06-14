@@ -1,10 +1,8 @@
 // Import deps
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-
-// Import components
-import { EmployeeList } from './employees-list'
-
+// Import subcomponents
+import { EmployeeList } from './employee-list'
 // Import styles
 //import './../styles/bookshelf.css'
 
@@ -13,22 +11,21 @@ export const Employee = () => {
   // Prepare states
   const [name, setName] = useState('')
   const [sales, setSales] = useState('')
-  const [employees, setEmployees] = useState([])
+  const [employees, setEmployee] = useState([])
   const [loading, setLoading] = useState(true)
 
-  // Fetch all books on initial render
+  // Fetch all employee on initial render and every state change
   useEffect(() => {
-    fetchEmployees()
+    fetchEmployee()
   }, [])
 
   // Fetch all books
-  const fetchEmployees = async () => {
+  const fetchEmployee = async () => {
     // Send GET request to 'books/all' endpoint
-    axios
-      .get('http://localhost:4001/employees/all')
+    axios.get('http://localhost:4001/employee/all')
       .then(response => {
         // Update the books state
-        setEmployees(response.data)
+        setEmployee(response.data)
         // Update loading state
         setLoading(false)
       })
@@ -45,16 +42,15 @@ export const Employee = () => {
   const handleEmployeeCreate = () => {
     // Send POST request to 'books/create' endpoint
     axios
-      .post('http://localhost:4001/employees/create', {
+      .post('http://localhost:4001/employee/create', {
         name: name,
         sales: sales
       })
       .then(res => {
         console.log(res.data)
-        console.log("HelloWorld from line 54 in handleEmployeeCreate");
         // Fetch all books to refresh
         // the books on the bookshelf list
-        fetchEmployees()
+        fetchEmployee()
       })
       .catch(error => console.error(`There was an error creating the ${name} employee: ${error}`))
   }
@@ -83,24 +79,24 @@ export const Employee = () => {
 
         // Fetch all books to refresh
         // the books on the bookshelf list
-        fetchEmployees()
+        fetchEmployee()
       })
       .catch(error => console.error(`There was an error removing the ${name} employee: ${error}`))
   }
 
   return (
-    <div className="book-list-wrapper">
-      {/* Form for creating new book */}
-      <div className="book-list-form">
+    <div className="employee-wrapper">
+      {/* Form for creating new employee */}
+      <div className="employee-form">
         <div className="form-wrapper" onSubmit={handleEmployeeSubmit}>
           <div className="form-row">
             <fieldset>
-              <label className="form-label" htmlFor="title">Enter name:</label>
-              <input className="form-input" type="text" id="title" name="title" value={name} onChange={(e) => setName(e.currentTarget.value)} />
+              <label className="form-label" htmlFor="name">Enter name: </label>
+              <input className="form-input" type="text" id="name" name="name" value={name} onChange={(e) => setName(e.currentTarget.value)} />
             </fieldset>
 
             <fieldset>
-              <label className="form-label" htmlFor="author">Enter sales:</label>
+              <label className="form-label" htmlFor="sales">Enter sales: </label>
               <input className="form-input" type="number" id="author" name="author" value={sales} onChange={(e) => setSales(e.currentTarget.value)} />
             </fieldset>
           </div>

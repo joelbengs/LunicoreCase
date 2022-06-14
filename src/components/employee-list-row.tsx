@@ -1,6 +1,6 @@
 import React from 'react'
 
-interface EmployeesListRowUI {
+interface EmployeeListRowUI {
     position: number,
     employee: {
         id: number,
@@ -11,7 +11,7 @@ interface EmployeesListRowUI {
 }
 
 // Create BookshelfListRow component
-export const EmployeesListRow = (props: EmployeesListRowUI) => (
+export const EmployeeListRow = (props: EmployeeListRowUI) => (
     <tr className="table-row">
       <td className="table-item">
         {props.position}

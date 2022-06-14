@@ -6,7 +6,8 @@ const cors = require('cors')
 const helmet = require('helmet')
 
 //import routes
-const employeesRouter = require('./routes/employees-routes.js')
+const employeeRouter = require('./routes/employee-routes.js')
+const carRouter = require('./routes/car-routes.js')
 
 // Set default port for express app
 const PORT = process.env.PORT || 4001
@@ -22,21 +23,24 @@ app.use(compression())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-// Implement employees route
-app.use('/employees', employeesRouter)
+// Implement employees route. This is where every request that has localhost:4001/employee gets sent
+app.use('/employee', employeeRouter)
+
+// Implement employees route. This is where every request that has localhost:4001/car gets sent
+app.use('/car', carRouter)
 
 // Implement 500 error route
 app.use(function (err, req, res, next) {
     console.error(err.stack)
-    res.status(500).send('Something is broken.')
+    res.status(500).send('Something is broken. (server.js 500)')
   })
 
 // Implement 404 error route
 app.use(function (req, res, next) {
-    res.status(404).send('Sorry we could not find that.')
+    res.status(404).send('Sorry we could not find that. (sever.js 404)')
   })
 
 // Start express app
 app.listen(PORT, function() {
-    console.log(`Server is running on: ${PORT}`)
+    console.log(`Server is running on: ${PORT}, (server.js)`)
   })

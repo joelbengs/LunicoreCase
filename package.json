@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "App for car sales built with React, Express and SQLite.",
   "private": false,
-  "main": "src/index.tsx",
+  "main": "src/index.js",
   "prox": "http://localhost:4001",
   "dependencies": {
     "axios": "0.27.2",
