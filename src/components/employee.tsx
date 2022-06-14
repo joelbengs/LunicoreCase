@@ -61,9 +61,7 @@ export const Employee = () => {
     if (name.length > 0 && sales.length > 0) {
       // Create new book
       handleEmployeeCreate()
-
       console.info(`Employee ${name} with sales of ${sales} added.`)
-
       // Reset all input fields
       handleInputsReset()
     }

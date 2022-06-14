@@ -1,5 +1,6 @@
 import React, {useEffect, useState } from 'react'
 import axios from 'axios'
+import { CarList } from './car-list';
 
 export function Car(props: any) {
     //STATES with hooks
@@ -14,7 +15,7 @@ export function Car(props: any) {
 
     //useEffect is a hook that run a function every time state changes
     //This is innefficient but MVP
-    useEffect(() => {getCarTable()});
+    useEffect(() => { getCarTable() });
 
     //Sends GET request to server and updates state
     const getCarTable = async () => {
@@ -38,43 +39,47 @@ export function Car(props: any) {
         })
         .catch(error => console.error('There was an error creating the Volvo car (from car.tsx): ${error}'))
     }
+
+    const handleSubmit = (event) => {
+        if(event.target.checkValidity() === true) {
+            console.log('Submit was valid');
+        } else {
+            console.log("Submit was not valid");
+        }
+    }
     
     return (
         <div className="car-wrapper">
             <h1>This is a car paragraph</h1>
-            <button onClick={postCar} className="btn btn-add">Add a Volvo!</button>
-        
-        <table className="table">
-            <thead>
-                <th className="table-head-item">#</th>
-                <th className="table-head-item">Brand</th>
-                <th className="table-head-item">Model</th>
-                <th className="table-head-item">Price</th>
-                <th className="table-head-item">Alternative</th>
-            </thead>
-            <tbody className='table-body'>
-                {carTable.length > 0 ? (
-                    <h1>carTable has a length!</h1>
-                    //<td>{carTable[0].brand}</td>
-                ):(
-                <tr className="table-row">
-                    <td className="table-item" style={{ textAlign: 'center' }} colSpan={6}>There are no cars to show. Create one!</td>
-                </tr>
-                )}
-            </tbody>
-        </table>
+            <button onClick={postCar} className="btn btn-add">Add a Volvo!</button>       
+            <CarList cars={carTable} />
+            
+            {/*form for creating new car*/}
+            <div className="car-form">
+                <div className="form-wrapper" onSubmit={handleSubmit}>
+                    <div className="form-row">
+                        <fieldset>
+                            <label className="form-label" >Enter brand: </label>
+                            <input className="form-input" type="text" id="brand" name="brand" value={brand} onChange={(e) => setBrand(e.currentTarget.value)} />
+                        </fieldset>
+
+                        <fieldset>
+                            <label className="form-label" >Enter model: </label>
+                            <input className="form-input" type="text" id="model" name="model" value={model} onChange={(e) => setModel(e.currentTarget.value)} />
+                        </fieldset>
+
+                        <fieldset>
+                            <label className="form-label" >Enter price: </label>
+                            <input className="form-input" type="number" id="price" name="price" value={price} onChange={(e) => setPrice(e.currentTarget.value)} />
+                        </fieldset>
+                    </div>
+                </div>
+                <button onClick={handleSubmit} className="btn btn-add">Add the car</button>
+            </div>
+
+
         </div>
     );
 } 
 
 
-{/*form for creating new car*/}
-            {/* <div className="form-wrapper" onSubmit={handleCarSubmit}>
-                <div className="form-row">
-                    <fieldset>
-                        <label className="form-label" htmlFor="brand">Enter brand: </label>
-                        <input className="form-input" type="text" id="brand" name="brand" value={brand} onChange={(e) => setBrand(e.currentTarget.value)} />
-                    </fieldset>
-
-                </div>
-            </div> */}
