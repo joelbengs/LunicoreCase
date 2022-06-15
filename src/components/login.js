@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 async function loginUser(credentials) {
-    return fetch('http://localhost:4001/login', {
+    return fetch('http://localhost:4001/user/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -10,6 +10,10 @@ async function loginUser(credentials) {
       body: JSON.stringify(credentials)
     })
       .then(data => data.json())
+}
+
+async function createUser(credentials) {
+  return fetch('http://localhost:4001/user/create')
 }
 
 export function Login({ setToken }) {
