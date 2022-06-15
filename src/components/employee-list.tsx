@@ -2,7 +2,7 @@
 import React from 'react'
 
 // Import components
-import { EmployeesListRow } from './employees-list-row';
+import { EmployeeListRow } from './employee-list-row';
 
 // Import styles
 //import './../styles/bookshelf-list.css'
@@ -11,13 +11,13 @@ import { EmployeesListRow } from './employees-list-row';
 interface EmployeeUI {
   id: number;
   name: string;
-  sales: number;
+  sale: number;
 }
 
 interface EmployeeListUI {
   employees: EmployeeUI[];
   loading: boolean;
-  handleEmployeeRemove: (id: number, name: string) => void;
+  handleEmployeeRemove: (id: number) => void;
 }
 
 // Create EmployeeList component
@@ -29,7 +29,7 @@ export const EmployeeList = (props: EmployeeListUI) => {
     <table className="table">
         <thead>
           <tr>
-            <th className="table-head-item" />
+            <th className="table-head-item" >id</th>
 
             <th className="table-head-item">Name</th>
 
@@ -41,19 +41,16 @@ export const EmployeeList = (props: EmployeeListUI) => {
 
         <tbody className="table-body">
           {props.employees.length > 0 ? (
-            props.employees.map((employee: EmployeeUI, idx) => (
-              <EmployeesListRow
+            props.employees.map((employee: EmployeeUI) => (
+              <EmployeeListRow
                 key={employee.id} //just because each thing needs a key
-                position={idx + 1}
                 employee={employee} //the component needs what is specified in the interface "EmployeesListRowUI"             
                 handleEmployeeRemove={props.handleEmployeeRemove}
               />
-              )
-            )
-          ) : (
-            <tr className="table-row">
+              ))) : (
+              <tr className="table-row">
               <td className="table-item" style={{ textAlign: 'center' }} colSpan={6}>There are no emplyees to show. Create one!</td>
-            </tr>
+              </tr>
           )
         }
         </tbody>
