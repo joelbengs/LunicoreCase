@@ -33,6 +33,13 @@ app.use('/car', carRouter)
 // Implement sale route. This is where every request that has localhost:4001/sale gets sent
 //app.use('/sale', saleRouter)
 
+// Implement login route. This is where every request that has localhost:4001/login gets sent
+app.use('/login', (req, res) => {
+  res.send({
+    token: 'test123'
+  });
+});
+
 // Implement 500 error route
 app.use(function (err, req, res, next) {
     console.error(err.stack)
