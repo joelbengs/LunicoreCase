@@ -2,6 +2,7 @@ import React, {useEffect, useState } from 'react'
 import axios from 'axios'
 import { CarList } from './car-list';
 import { LoadCar } from './car-load-data';
+import Button from 'react-bootstrap/Button';
 
 export function Car(props: any) {
     //STATES with hooks
@@ -10,6 +11,7 @@ export function Car(props: any) {
     //The current state and a function for updating it.
     //To update state, simply call the update function with the new value as parameter.
     const [carTable, setCarTable] = useState([]);   //state with all cars
+    const [id, setId] = useState('');
     const [brand, setBrand] = useState('');
     const [model, setModel] = useState('');
     const [price, setPrice] = useState('');
@@ -30,6 +32,7 @@ export function Car(props: any) {
     //Sends POST request to server
     const handleCreateCar = () => {
         axios.post('http://localhost:4001/car/create', {
+            id: id,
             brand: brand,
             model: model,
             price: parseInt(price)
@@ -41,10 +44,11 @@ export function Car(props: any) {
         .catch(error => console.error('There was an error creating the ${name} car (from car.tsx): ${error}'))
     }
 
+    //Send Delete request (put as workaround)
     const handleDeleteCar = (id: number) => {
         axios.put('http://localhost:4001/car/delete', { id:id })
         .then(() => {
-            console.log('Car with id ${id} deleted')
+            console.log(`Car with id ${id} deleted`)
             getCarTable();
         })
         .catch(error => console.error(`There was an error removing the car with id ${id}: ${error}`))
@@ -52,7 +56,7 @@ export function Car(props: any) {
 
     //Handle the submit from the form
     const handleSubmit = () => {
-        if (brand.length > 0 && model.length > 0 && price.length > 0) {
+        if (brand.length > 0 && model.length > 0 && price.length > 0 && id.length > 0) {
             handleCreateCar();
         } else {
             console.info('Form was not valid - try again')
@@ -62,6 +66,7 @@ export function Car(props: any) {
 
     //Resets the form upon submit
     const handleInputReset = () => {
+        setId('');
         setBrand('');
         setModel('');
         setPrice('');
@@ -71,12 +76,19 @@ export function Car(props: any) {
     return (
         <div className="car-wrapper">            
             {/*List of existing cars*/}
-            <CarList cars={carTable} handleDeleteCar={handleDeleteCar} />
+            <div>
+                <CarList cars={carTable} handleDeleteCar={handleDeleteCar} />
+            </div>
             
             {/*form for creating new car*/}
-            <div className="car-form">
+            <div className="div-form">
                 <div className="form-wrapper" onSubmit={handleSubmit}>
                     <div className="form-row">
+                        <fieldset>
+                            <label className="form-label" >Enter car id :</label>
+                            <input className="form-input" type="text" id="id" name="id" value={id} onChange={(e) => setId(e.currentTarget.value)} />
+                        </fieldset>
+
                         <fieldset>
                             <label className="form-label" >Enter brand :</label>
                             <input className="form-input" type="text" id="brand" name="brand" value={brand} onChange={(e) => setBrand(e.currentTarget.value)} />
@@ -89,12 +101,14 @@ export function Car(props: any) {
 
                         <fieldset>
                             <label className="form-label" >Enter price :</label>
-                            <input className="form-input" type="string" id="price" name="price" value={price} onChange={(e) => setPrice(e.currentTarget.value)} />
+                            <input className="form-input" type="text" id="price" name="price" value={price} onChange={(e) => setPrice(e.currentTarget.value)} />
                         </fieldset>
                     </div>
                 </div>
-                <button onClick={handleSubmit} className="btn btn-add">Add the car</button>
+                <Button onClick={handleSubmit} variant="outline-success">Add the Car</Button>
             </div>
+            
+            <br></br>
             <LoadCar></LoadCar>
         </div>
     );

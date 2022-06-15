@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import Button from 'react-bootstrap/Button';
 const data = require('../data/data.json');
 const {carshop: {employees, carmodels, sales}} = data;
 
@@ -27,7 +28,7 @@ const addLocalEmployee = () => {
 export function LoadEmployee(props: any) {
     return (
         <div>
-            <button onClick={addLocalEmployee} className="btn btn-add">Press here to add employees from local file</button>
+            <Button onClick={addLocalEmployee} variant="outline-info">Add employees from local file</Button>
         </div>
         )
 }

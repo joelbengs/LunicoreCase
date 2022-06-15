@@ -33,8 +33,6 @@ export const EmployeeList = (props: EmployeeListUI) => {
 
             <th className="table-head-item">Name</th>
 
-            <th className="table-head-item">Sales</th>
-
             <th className="table-head-item" />
           </tr>
         </thead>

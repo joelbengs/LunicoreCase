@@ -1,11 +1,12 @@
-import { json } from "body-parser";
 import React from "react";
 import axios from "axios";
+import Button from 'react-bootstrap/Button';
 const data = require('../data/data.json');
 const {carshop: {employees, carmodels, sales}} = data;
 
-const handleCreateCar = (brand: string, model: string, price: number) => {
+const handleCreateCar = (id: number, brand: string, model: string, price: number) => {
     axios.post('http://localhost:4001/car/create', {
+        id: id,
         brand: brand,
         model: model,
         price: price
@@ -20,15 +21,14 @@ const handleCreateCar = (brand: string, model: string, price: number) => {
 //Adds all cars to the database
 const addLocalCars = () => {
     carmodels.forEach((car: {id: number; brand: string; model: string; price: number; }) => {
-        handleCreateCar(car.brand, car.model, car.price)
+        handleCreateCar(car.id, car.brand, car.model, car.price)
     });
 }
 
 export function LoadCar(props: any) {
 return (
     <div>
-        <button onClick={addLocalCars} className="btn btn-add">Press here to add cars from local file</button>
+        <Button onClick={addLocalCars} variant="outline-info">Add cars from local file</Button>
     </div>
-    
     )
 }

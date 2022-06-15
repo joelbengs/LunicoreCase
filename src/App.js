@@ -1,8 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
 import {NavLink, Link, Outlet, Route, Routes} from 'react-router-dom';
-//import Home from './routes/Home';
-//import About from './routes/About';
 import 'bootstrap/dist/css/bootstrap.css';
 
 import { Welcome } from './components/Welcome';

@@ -13,6 +13,7 @@ exports.carAll = async(req, res) => {
 //POST car
 exports.carCreate = async(req, res) => {
     knex('car').insert({
+        'id': req.body.id,
         'brand': req.body.brand,
         'model': req.body.model,
         'price': req.body.price
@@ -33,23 +34,10 @@ exports.carDelete = async(req, res) => {
     .del()
     .then(userData => {
         res.json(userData)
+        //res.json({ message: `Car ${req.body.id} deleted.` })
       })
       .catch(err => {
         // Send a error message in response
         res.json({ message: `There was an error deleting ${req.body.id} car: ${err}` })
       })
   }
-
-/*   //DELETE car, without returning it
-exports.carDelete = async(req, res) => {
-    knex('car').where('id', req.body.id)
-    .del()
-    .then(() => {
-        // Send a success message in response
-        res.json({ message: `Car ${req.body.id} deleted.` })
-      })
-      .catch(err => {
-        // Send a error message in response
-        res.json({ message: `There was an error deleting ${req.body.id} car: ${err}` })
-      })
-  } */

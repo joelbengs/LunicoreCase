@@ -22,10 +22,6 @@ export const EmployeeListRow = (props: EmployeeListRowUI) => (
       </td>
   
       <td className="table-item">
-        {props.employee.sale}
-      </td>
-  
-      <td className="table-item">
         <button
           className="btn btn-remove"
           onClick={() => props.handleEmployeeRemove(props.employee.id)}>
