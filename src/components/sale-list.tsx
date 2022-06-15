@@ -2,26 +2,22 @@
 import React from 'react'
 
 // Import components
-import { EmployeeListRow } from './employee-list-row';
-
-// Import styles
-//import './../styles/bookshelf-list.css'
+import { SaleListRow } from './sale-list-row';
 
 // Create interfaces
-interface EmployeeUI {
+interface SaleUI {
   id: number;
   name: string;
   sale: number;
 }
 
-interface EmployeeListUI {
-  employees: EmployeeUI[];
+interface SaleListUI {
+  employees: SaleUI[];
   loading: boolean;
-  handleEmployeeRemove: (id: number) => void;
 }
 
 // Create EmployeeList component
-export const EmployeeList = (props: EmployeeListUI) => {
+export const SaleList = (props: SaleListUI) => {
   // Show loading message
   if (props.loading) return <p>Leaderboard table is loading...</p>
 
@@ -33,21 +29,20 @@ export const EmployeeList = (props: EmployeeListUI) => {
 
             <th className="table-head-item">Name</th>
 
-            <th className="table-head-item" />
+            <th className="table-head-item">Sales</th>
           </tr>
         </thead>
 
         <tbody className="table-body">
           {props.employees.length > 0 ? (
-            props.employees.map((employee: EmployeeUI) => (
-              <EmployeeListRow
+            props.employees.map((employee: SaleUI) => (
+              <SaleListRow
                 key={employee.id} //just because each thing needs a key
                 employee={employee} //the component needs what is specified in the interface "EmployeesListRowUI"             
-                handleEmployeeRemove={props.handleEmployeeRemove}
               />
               ))) : (
               <tr className="table-row">
-              <td className="table-item" style={{ textAlign: 'center' }} colSpan={6}>There are no emplyees to show. Create one!</td>
+              <td className="table-item" style={{ textAlign: 'center' }} colSpan={3}>There are no employees to show. Create one!</td>
               </tr>
           )
         }

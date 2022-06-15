@@ -14,15 +14,6 @@ const knex = require('knex')({
   })
 
 //Create a table in the database called "employee"
-  // Make sure no "employee" table exists
-  // before trying to create new
-      // If no "employee" table exists
-        // create new, with "id" and "name"columns
-        // and use "id" as a primary identification
-        // and increment "id" with every new record
-//The knex.SCHEMA is a getter function, which returns a stateful object containing the query.
-//Therefore be sure to obtain a new instance of the knex.schema for every query.
-//These methods return promises.
 knex.schema.hasTable('employee')
     .then((exists) => {
       if (!exists) {
@@ -51,7 +42,7 @@ knex.schema.hasTable('car')
 .then((exists) => {
   if (!exists) {
     return knex.schema.createTable('car', (table) => {
-      table.increments('id').primary();
+      table.integer('id').primary();
       table.string('brand');
       table.string('model');
       table.integer('price');
@@ -90,7 +81,7 @@ knex.schema.hasTable('sale')
   });
 
 // Just for debugging purposes:
-knex.select('*').from('employees')
+knex.select('*').from('employee')
   .then(data => console.log('initial data from employee table from knex in db.js:', data))
   .catch(err => console.log(err))
 

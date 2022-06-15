@@ -1,16 +1,15 @@
 import React from 'react'
 
-interface EmployeeListRowUI {
+interface SaleListRowUI {
     employee: {
         id: number,
         name: string,
         sale: number
     }
-    handleEmployeeRemove: (id: number) => void;
 }
 
 // Create BookshelfListRow component
-export const EmployeeListRow = (props: EmployeeListRowUI) => (
+export const SaleListRow = (props: SaleListRowUI) => (
     <tr className="table-row">
   
       <td className="table-item">
@@ -22,11 +21,7 @@ export const EmployeeListRow = (props: EmployeeListRowUI) => (
       </td>
   
       <td className="table-item">
-        <button
-          className="btn btn-remove"
-          onClick={() => props.handleEmployeeRemove(props.employee.id)}>
-          Remove employee
-        </button>
+        {props.employee.sale}
       </td>
     </tr>
 )

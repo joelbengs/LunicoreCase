@@ -1,5 +1,6 @@
 import React from "react";
 import { CarListRow } from './car-list-row';
+import '../App.css'
 
 interface CarUI {
     id: number;
@@ -22,7 +23,7 @@ export const CarList = (props: CarListUI) => {
                     <th className="table-head-item">Brand</th>
                     <th className="table-head-item">Model</th>
                     <th className="table-head-item">Price</th>
-                    <th className="table-head-item">Alternative</th>
+                    <th className="table-head-item"></th>
                 </tr>
             </thead>
 

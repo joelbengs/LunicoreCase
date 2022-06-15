@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { EmployeeList } from './employee-list'
+import { LoadEmployee } from './employee-load-data'
+import Button from 'react-bootstrap/Button';
 
 export const Employee = () => {
   // Prepare states
@@ -13,7 +15,7 @@ export const Employee = () => {
   // Fetch all employee on initial render and every state change
   useEffect(() => {
     fetchEmployee()
-  }, [])
+  })
 
   // Fetch all employees and total sales
   const fetchEmployee = async () => {
@@ -46,14 +48,13 @@ export const Employee = () => {
         console.log(res.data)
         fetchEmployee()
       })
-      .catch(error => console.error(`There was an error creating the ${name} employee: ${error}`))
+      .catch(error => console.error(`HELLO! There was an error creating the ${name} employee: ${error}`))
   }
 
  // Submit new employee
  const handleEmployeeSubmit = () => {
     if (id.length > 0 && name.length > 0 && sale.length > 0) {
       handleEmployeeCreate()
-      console.info(`Employee ${name} with sales of ${sale} added.`)
       handleInputsReset()
     }
   }
@@ -77,7 +78,8 @@ export const Employee = () => {
       <EmployeeList employees={employees} loading={loading} handleEmployeeRemove={handleEmployeeRemove} />
       
       {/* Form for creating new employee */}
-      <div className="employee-form">
+      <div className="div-form">
+        <h3>Add a new Employee</h3>
         <div className="form-wrapper" onSubmit={handleEmployeeSubmit}>
           <div className="form-row">
           <fieldset>
@@ -97,8 +99,10 @@ export const Employee = () => {
           </div>
         </div>
 
-        <button onClick={handleEmployeeSubmit} className="btn btn-add">Add the employee</button>
+        <Button onClick={handleEmployeeSubmit} variant="outline-success">Add the employee</Button>
       </div>
+      <br></br>
+      <LoadEmployee></LoadEmployee>
     </div>
   )
 }
