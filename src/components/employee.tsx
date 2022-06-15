@@ -72,6 +72,10 @@ export const Employee = () => {
 
   return (
     <div className="employee-wrapper">
+      
+      {/* Render  list component */}
+      <EmployeeList employees={employees} loading={loading} handleEmployeeRemove={handleEmployeeRemove} />
+      
       {/* Form for creating new employee */}
       <div className="employee-form">
         <div className="form-wrapper" onSubmit={handleEmployeeSubmit}>
@@ -95,9 +99,6 @@ export const Employee = () => {
 
         <button onClick={handleEmployeeSubmit} className="btn btn-add">Add the employee</button>
       </div>
-
-      {/* Render  list component */}
-      <EmployeeList employees={employees} loading={loading} handleEmployeeRemove={handleEmployeeRemove} />
     </div>
   )
 }

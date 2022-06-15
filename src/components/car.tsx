@@ -68,10 +68,7 @@ export function Car(props: any) {
     
     //HTML
     return (
-        <div className="car-wrapper">
-            <h1>This is a car paragraph</h1>
-            <button onClick={handleCreateCar} className="btn btn-add">Add a Volvo!</button>       
-            
+        <div className="car-wrapper">            
             {/*List of existing cars*/}
             <CarList cars={carTable} handleDeleteCar={handleDeleteCar} />
             
@@ -80,17 +77,17 @@ export function Car(props: any) {
                 <div className="form-wrapper" onSubmit={handleSubmit}>
                     <div className="form-row">
                         <fieldset>
-                            <label className="form-label" >Enter brand: </label>
+                            <label className="form-label" >Enter brand :</label>
                             <input className="form-input" type="text" id="brand" name="brand" value={brand} onChange={(e) => setBrand(e.currentTarget.value)} />
                         </fieldset>
 
                         <fieldset>
-                            <label className="form-label" >Enter model: </label>
+                            <label className="form-label" >Enter model :</label>
                             <input className="form-input" type="text" id="model" name="model" value={model} onChange={(e) => setModel(e.currentTarget.value)} />
                         </fieldset>
 
                         <fieldset>
-                            <label className="form-label" >Enter price: </label>
+                            <label className="form-label" >Enter price :</label>
                             <input className="form-input" type="string" id="price" name="price" value={price} onChange={(e) => setPrice(e.currentTarget.value)} />
                         </fieldset>
                     </div>
