@@ -2,7 +2,13 @@ node_modules
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # The database file that will be recreated upon start
-server/db/database.sqlite
+#server/db/database.sqlite
+
+# exclude the database
+server/db/*
+
+# exception to the rule, as to keep the folder
+!server/db/.gitkeep 
 
 # dependencies
 /node_modules
