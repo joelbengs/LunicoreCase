@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { EmployeeList } from './employee-list'
+import { LoadEmployee } from './employee-load-data'
 
 export const Employee = () => {
   // Prepare states
@@ -99,6 +100,7 @@ export const Employee = () => {
 
         <button onClick={handleEmployeeSubmit} className="btn btn-add">Add the employee</button>
       </div>
+      <LoadEmployee></LoadEmployee>
     </div>
   )
 }

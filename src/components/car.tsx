@@ -1,6 +1,7 @@
 import React, {useEffect, useState } from 'react'
 import axios from 'axios'
 import { CarList } from './car-list';
+import { LoadCar } from './car-load-data';
 
 export function Car(props: any) {
     //STATES with hooks
@@ -94,6 +95,7 @@ export function Car(props: any) {
                 </div>
                 <button onClick={handleSubmit} className="btn btn-add">Add the car</button>
             </div>
+            <LoadCar></LoadCar>
         </div>
     );
 } 
