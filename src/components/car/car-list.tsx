@@ -1,6 +1,5 @@
 import React from "react";
 import { CarListRow } from './car-list-row';
-import '../App.css'
 
 interface CarUI {
     id: number;

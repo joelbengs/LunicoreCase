@@ -2,12 +2,11 @@ import './App.css';
 import {NavLink, Outlet, Route, Routes} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 
-import { Welcome } from './components/Welcome';
-import { Employee } from './components/employee';
-import { Car } from './components/car.tsx';
-import { Sale } from './components/sale';
-import { Dashboard } from './components/dashboard';
-import { Preferences } from './components/preferences';
+import { Welcome } from './components/welcome';
+import { Employee } from './components/employee/employee';
+import { Car } from './components/car/car.tsx';
+import { Sale } from './components/sale/sale';
+import { Dashboard } from './components/dashboard/dashboard';
 import { Login } from './components/login';
 import useToken from './components/useToken'
 
@@ -31,9 +30,7 @@ function App() {
           <Route path="/employees" element={<Employee/> } />
           <Route path="/sales" element={<Sale />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/employee" >
-            <Route path=":name" element={<Welcome />} />
-          </Route>
+          <Route path="/employee" />
           <Route path="/*" element={
             <main style={{ padding: "1rem" }}>
               <center><h1>404 - There's nothing here!</h1></center>
@@ -78,10 +75,8 @@ function Navbar() {
 
 function Footer() {
   return(
-    //<React.Fragment>
     <footer className="pt-3 mt-4 text-muted border-top">
-      Carshop Case || Built with Node.js, SQLite, Knex, Express, Bootstrap React and React || Lunicore Student Consulting || Joel Bengs
+      Carshop Case || Lunicore Student Consulting || Joel Bengs 2022
     </footer>
-    //</React.Fragment>
   );
 }

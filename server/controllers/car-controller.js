@@ -28,7 +28,7 @@ exports.carCreate = async(req, res) => {
     })
 };
 
-//DELETE car, and return it (might not be working)
+//DELETE car, and return it (return is not functioning here)
 exports.carDelete = async(req, res) => {
     knex('car').where('id', req.body.id)
     .del()

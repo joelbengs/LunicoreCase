@@ -9,7 +9,6 @@ const helmet = require('helmet')
 const employeeRouter = require('./routes/employee-routes.js')
 const carRouter = require('./routes/car-routes.js')
 const userRouter = require('./routes/user-routes.js')
-//const saleRouter = require('./routes/sale-routes.js')
 
 // Set default port for express app
 const PORT = process.env.PORT || 4001
@@ -33,9 +32,6 @@ app.use('/car', carRouter)
 
 // Implement user route. This is where every request that has localhost:4001/user gets sent
 app.use('/user', userRouter)
-
-// Implement sale route. This is where every request that has localhost:4001/sale gets sent
-//app.use('/sale', saleRouter
 
 // Implement 500 error route
 app.use(function (err, req, res, next) {

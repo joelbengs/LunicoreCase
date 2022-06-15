@@ -1,7 +1,6 @@
 const path = require('path')
 const dbPath = path.resolve(__dirname, "db/userbase.sqlite")
 const sqlite = require('sqlite3');
-//const db = new sqlite.Database('./db/userbase.sqlite'); //I might need "new" here
 const db = new sqlite.Database(dbPath);
 
 //Create the user table. Drop it if it allready exists
@@ -19,7 +18,7 @@ db.serialize(() => {
       });  
  
     //Make a first insert to the table and log it, for debugging purposes
-    db.run("INSERT INTO user (id, username, password) VALUES (1, 'Joel', 'Bengs')", function(error) {
+    db.run("INSERT INTO user (username, password) VALUES ('Joel', 'Bengs')", function(error) {
       if(error) {
         console.log(error);
         return null;

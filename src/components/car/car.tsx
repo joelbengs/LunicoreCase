@@ -82,6 +82,7 @@ export function Car(props: any) {
             
             {/*form for creating new car*/}
             <div className="div-form">
+            <h3>Add a new Car</h3>
                 <div className="form-wrapper" onSubmit={handleSubmit}>
                     <div className="form-row">
                         <fieldset>

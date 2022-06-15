@@ -1,5 +1,6 @@
 //This controller will recieve reqeuests related to the employee table in the database
-//it uses knex to interact with SQLite
+//it uses knex to interact with SQLite - a bad choice as knex is not well documented
+//Better would have been to send SQL with sqlite3 as in the user-controller
 
 // Import database
 const knex = require('../db');

@@ -1,7 +1,7 @@
 {
   "name": "lunicore-case",
   "version": "1.0.0",
-  "description": "App for car sales built with React, Express and SQLite.",
+  "description": "Website for a car dealership",
   "private": false,
   "main": "src/index.js",
   "prox": "http://localhost:4001",

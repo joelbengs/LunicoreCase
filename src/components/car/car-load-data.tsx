@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Button from 'react-bootstrap/Button';
-const data = require('../data/data.json');
+const data = require('../../data/data.json');
 const {carshop: {employees, carmodels, sales}} = data;
 
 const handleCreateCar = (id: number, brand: string, model: string, price: number) => {

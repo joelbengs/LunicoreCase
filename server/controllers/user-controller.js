@@ -23,9 +23,6 @@ exports.userCreate = async(req, res) => {
       });
     }
 
-//POST - login to existing account
-//not yet implemented
-
 //POST - login, (MVP while building frontend)
 exports.userLogin = async(req, res) => {
     res.send({

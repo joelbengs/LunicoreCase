@@ -1,14 +1,16 @@
-# Joel's Junkyard
+# Joey's Junkyard
 
-A website for a car dealership, with a SQLite server for data storage.
+A website for a car dealership. Built as a case in web development.
 
-Functions:
--> Login
--> 
+Built with Node.js, React, SQLite, Express and Bootstrap.
+
+Some functionality is work-in-progress.
 
 ## Get started
 Download the files.
-Open a terminal window
+Open a terminal window with node.js installed
+run `npm install` to install dependencies
+run `npm start`to launch the application
 
 ## Available Scripts
 
